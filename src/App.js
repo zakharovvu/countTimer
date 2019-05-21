@@ -1,9 +1,18 @@
 import React from 'react';
 import './App.css';
+import styled from "styled-components"
+
+const Div = styled.div`
+  background: green;
+  width: 50px;
+  height: ${(props) => props.height + 'px'};
+  margin: auto
+`
 
 class App extends React.Component {
   state = {
-    count: 0
+    count: 0,
+    height: 0
   }
   numberTimer = null
 
@@ -15,7 +24,7 @@ class App extends React.Component {
     clearTimeout(this.numberTimer)
 
     let ms = 0 
-    const maxNumber = 100000 
+    const maxNumber = 100000
     let random = Math.floor(Math.random() * maxNumber) 
     const stepDown = Math.round(random / 100) || 1 
     const stepMs = 10 
@@ -26,13 +35,13 @@ class App extends React.Component {
       random -= stepDown
       if (random < 0) {
         clearTimeout(this.numberTimer)
-        bindingThis.setState({ count: 0 })
+        bindingThis.setState({ count: 0, height: 0 })
       } else {
         if (random < startSlow) ms += stepMs
         
         clearTimeout(this.numberTimer)
         this.numberTimer = setTimeout(teak, ms)
-        bindingThis.setState({ count: random })
+        bindingThis.setState({ count: random, height: random / (maxNumber / 100) * 4 })
     }}, ms);
   }
 
@@ -41,6 +50,7 @@ class App extends React.Component {
       <div className="App">
         <div>{this.state.count}</div>
         <button onClick={this.handleClick}>Click</button>
+        <Div height={this.state.height}></Div>
       </div>
     )
   }
