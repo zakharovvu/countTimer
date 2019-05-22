@@ -23,21 +23,27 @@ class App extends React.Component {
   handleClick = () => {
     clearTimeout(this.numberTimer)
 
-    let ms = 0 
+    let ms = 16 
     const maxNumber = 100000
     let random = Math.floor(Math.random() * maxNumber) 
-    const stepDown = Math.floor(random / 100) || 1 
-    const stepMs = 8 
-    const startSlow = random * 0.2 
+    let ran = random
+    let stepDown = random / 100 
+    const startSlow = random * 0.1
     const bindingThis = this 
 
     this.numberTimer = setTimeout(function teak() {
       random -= stepDown
       if (random < 0) {
+         
         clearTimeout(this.numberTimer)
         bindingThis.setState({ count: 0, height: 0 })
       } else {
-        if (random < startSlow) ms += stepMs
+
+        if (random < startSlow) {
+          stepDown = 100
+        }
+        
+        
         
         clearTimeout(this.numberTimer)
         this.numberTimer = setTimeout(teak, ms)
@@ -48,7 +54,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <div>{this.state.count}</div>
+        <div>{Math.round(this.state.count)}</div>
         <button onClick={this.handleClick}>Click</button>
         <Progress height={this.state.height}></Progress>
       </div>
