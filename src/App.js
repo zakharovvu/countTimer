@@ -24,11 +24,11 @@ class App extends React.Component {
     clearTimeout(this.numberTimer)
 
     let ms = 0 
-    const maxNumber = 10000
+    const maxNumber = 100000
     let random = Math.floor(Math.random() * maxNumber) 
     const stepDown = Math.floor(random / 100) || 1 
-    const stepMs = 30 
-    const startSlow = random * 0.1 
+    const stepMs = 8 
+    const startSlow = random * 0.2 
     const bindingThis = this 
 
     this.numberTimer = setTimeout(function teak() {
