@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import styled from "styled-components"
 
-const Div = styled.div`
+const Progress = styled.div`
   background: green;
   width: 50px;
   height: ${(props) => props.height + 'px'};
@@ -24,11 +24,11 @@ class App extends React.Component {
     clearTimeout(this.numberTimer)
 
     let ms = 0 
-    const maxNumber = 100000
+    const maxNumber = 10000
     let random = Math.floor(Math.random() * maxNumber) 
-    const stepDown = Math.round(random / 100) || 1 
-    const stepMs = 10 
-    const startSlow = random * 0.2 
+    const stepDown = Math.floor(random / 100) || 1 
+    const stepMs = 30 
+    const startSlow = random * 0.1 
     const bindingThis = this 
 
     this.numberTimer = setTimeout(function teak() {
@@ -50,7 +50,7 @@ class App extends React.Component {
       <div className="App">
         <div>{this.state.count}</div>
         <button onClick={this.handleClick}>Click</button>
-        <Div height={this.state.height}></Div>
+        <Progress height={this.state.height}></Progress>
       </div>
     )
   }
